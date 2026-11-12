@@ -1,0 +1,9 @@
+{
+  "name": "mis3011-notes",
+  "version": "1.0.0",
+  "private": true,
+  "description": "MIS3011 Advanced AI for Business 学习站（docsify 静态站）",
+  "scripts": {
+    "dev": "node serve.js"
+  }
+}
