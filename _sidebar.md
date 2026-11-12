@@ -1,0 +1,15 @@
+- 🏠 [首页 · 课程导览](/)
+- 🧭 学习指南
+  - [如何使用本站](/modules/how-to-use)
+  - [知识点总清单](/modules/checklist)
+- 📚 课程模块
+  - [WK1 · 课程导览](/modules/wk1-overview)
+  - [WK2 · AI 系统基础](/modules/wk2-foundations)
+  - [WK3 · Decision AI](/modules/wk3-decision-ai)
+  - [WK4 · 神经网络与深度学习](/modules/wk4-neural-networks)
+  - [WK6 · Language AI (1)](/modules/wk6-language-ai-1)
+  - [WK7 · Language AI (2)](/modules/wk7-language-ai-2)
+  - [WK8 · Building LLM Systems](/modules/wk8-building-llm-systems)
+  - [WK9 · Grounding LLMs](/modules/wk9-grounding-llms)
+- 🧪 [Lab & 作业考点](/modules/labs-assignments)
+- ⚡ [考前冲刺](/modules/exam-sprint)
