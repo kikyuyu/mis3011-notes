@@ -1,28 +1,28 @@
 /* ============================================================
-   MIS3011 学习站 · 黑 × 深蓝 简约主题
+   MIS3011 学习站 · 黑 × 深蓝 简约主题 v2
    字体：微软雅黑全局
    ============================================================ */
 
 :root {
   --bg: #0a0e1a;
   --bg-soft: #101528;
-  --bg-card: #131a30;
-  --bg-hover: #1a2340;
-  --line: #232d4d;
-  --ink: #dbe4f5;
-  --ink-dim: #8b98b8;
-  --ink-faint: #5a6684;
-  --blue: #4f8cff;
-  --blue-soft: #2b5cb8;
-  --cyan: #56ccf2;
-  --violet: #9b8cff;
-  --amber: #f2c56c;
-  --green: #6dd9a4;
-  --red: #f27d7d;
-  --hl-yellow: rgba(242, 197, 108, .32);
-  --hl-green: rgba(109, 217, 164, .30);
-  --hl-blue: rgba(86, 204, 242, .30);
-  --hl-pink: rgba(242, 125, 196, .28);
+  --bg-card: #141b33;
+  --bg-hover: #1c2547;
+  --line: #273254;
+  --ink: #e3eaf8;
+  --ink-dim: #9aa7c6;
+  --ink-faint: #66718f;
+  --blue: #5c9aff;
+  --blue-soft: #3563c9;
+  --cyan: #62d4f5;
+  --violet: #a89aff;
+  --amber: #f5cd7d;
+  --green: #79e0ae;
+  --red: #f58b8b;
+  --hl-yellow: rgba(242, 197, 108, .34);
+  --hl-green: rgba(109, 217, 164, .32);
+  --hl-blue: rgba(86, 204, 242, .32);
+  --hl-pink: rgba(242, 125, 196, .30);
 }
 
 * { box-sizing: border-box; }
@@ -32,6 +32,13 @@ html, body {
   font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Segoe UI", sans-serif;
   color: var(--ink);
 }
+
+/* ========== 关键修复 ==========
+   docsify 会把标题文字包在 <h1><a class="anchor"><span> 里，
+   vue.css 的 .anchor span { color:#34495e } 直接命中 span，
+   优先级高于 h1 上的颜色设置 —— 这就是标题发暗的根因。
+   以下规则必须放在最前面并强制覆盖。 */
+.anchor span { color: inherit !important; }
 
 /* ---------- 布局骨架 ---------- */
 body .sidebar {
@@ -51,40 +58,100 @@ body .content {
 .sidebar ul li a.active {
   color: var(--blue);
   border-right: 3px solid var(--blue);
-  background: linear-gradient(90deg, rgba(79,140,255,.10), transparent);
+  background: linear-gradient(90deg, rgba(92,154,255,.14), transparent);
+  font-weight: 600;
 }
 .sidebar h1.app-name a { color: var(--ink); font-weight: 600; }
 .sidebar .app-name .app-name-link img { display:none; }
 
+/* ---------- 搜索插件暗色化 ---------- */
+.search {
+  border-bottom: 1px solid var(--line);
+  padding: 8px 12px;
+}
+.search input {
+  width: 100%;
+  background: #141b33;
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 8px 12px;
+  font-family: inherit;
+  font-size: 14px;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.search input::placeholder { color: var(--ink-faint); }
+.search input:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(92,154,255,.18);
+}
+.search input::-webkit-search-cancel-button { filter: invert(.7); }
+.search .results-panel {
+  background: #10162b;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  box-shadow: 0 10px 32px rgba(0,0,0,.55);
+  color: var(--ink);
+}
+.search .results-panel .search-result {
+  color: var(--ink);
+  border-bottom: 1px solid var(--line);
+  font-size: 13px;
+}
+.search .results-panel .search-result:last-child { border-bottom: none; }
+.search .results-panel .search-result:hover,
+.search .results-panel .search-result.active {
+  background: var(--bg-hover);
+}
+.search .results-panel .search-result .title { color: var(--cyan); }
+.search .results-panel .search-result p { color: var(--ink-dim); }
+.search .no-results { color: var(--ink-faint); background: #10162b; }
+
 /* ---------- 正文排版 ---------- */
 .markdown-section {
   max-width: 920px;
-  padding: 40px 48px 120px;
+  padding: 44px 48px 120px;
   color: var(--ink);
 }
+
+/* 标题：亮白 + 清晰层级。文本在 .anchor span 里，靠 inherit 继承这里的颜色 */
 .markdown-section h1, .markdown-section h2, .markdown-section h3,
 .markdown-section h4, .markdown-section h5 {
   font-family: "Microsoft YaHei", "微软雅黑", sans-serif;
-  color: var(--ink);
   border: none;
-  font-weight: 600;
+  font-weight: 700;
 }
-.markdown-section h1 { font-size: 30px; padding-bottom: 12px; border-bottom: 2px solid var(--line); }
+.markdown-section h1 {
+  font-size: 32px;
+  color: #ffffff;
+  padding-bottom: 14px;
+  border-bottom: 2px solid transparent;
+  border-image: linear-gradient(90deg, var(--blue), var(--cyan), transparent) 1;
+  margin-top: 8px;
+}
 .markdown-section h2 {
-  font-size: 22px;
-  margin-top: 48px;
+  font-size: 23px;
+  color: #f2f6ff;
+  margin-top: 52px;
   padding: 10px 14px;
   background: linear-gradient(90deg, var(--bg-card), transparent);
   border-left: 4px solid var(--blue);
   border-radius: 0 8px 8px 0;
 }
-.markdown-section h3 { font-size: 18px; color: var(--cyan); margin-top: 32px; }
-.markdown-section h4 { font-size: 16px; color: var(--violet); }
+.markdown-section h3 {
+  font-size: 18px;
+  color: var(--cyan);
+  margin-top: 34px;
+  font-weight: 600;
+}
+.markdown-section h4 { font-size: 16px; color: var(--violet); font-weight: 600; }
+
 .markdown-section p, .markdown-section li { color: var(--ink); line-height: 1.9; font-size: 15px; }
 .markdown-section ul li, .markdown-section ol li { margin: 4px 0; }
-.markdown-section a { color: var(--blue); }
-.markdown-section a:hover { color: var(--cyan); }
-.markdown-section strong { color: #fff; font-weight: 600; }
+.markdown-section a { color: var(--blue); text-decoration: none; }
+.markdown-section a:hover { color: var(--cyan); text-decoration: underline; }
+.markdown-section strong { color: #ffffff; font-weight: 700; }
 .markdown-section em { color: var(--amber); font-style: normal; font-weight: 500; }
 .markdown-section blockquote {
   border-left: 4px solid var(--blue-soft);
@@ -94,7 +161,7 @@ body .content {
   color: var(--ink-dim);
 }
 .markdown-section code {
-  background: #1b2340;
+  background: #1d2647;
   color: var(--cyan);
   border-radius: 4px;
   padding: 2px 6px;
@@ -106,7 +173,7 @@ body .content {
   border: 1px solid var(--line);
   border-radius: 10px;
 }
-.markdown-section pre code { background: transparent; color: #c8d6f0; }
+.markdown-section pre code { background: transparent; color: #d3e0f7; }
 .markdown-section table {
   display: table;
   width: 100%;
@@ -114,28 +181,32 @@ body .content {
   margin: 16px 0;
 }
 .markdown-section th {
-  background: var(--bg-card);
+  background: #182140;
   color: var(--cyan);
-  font-weight: 600;
+  font-weight: 700;
 }
 .markdown-section th, .markdown-section td {
   border: 1px solid var(--line);
-  padding: 8px 14px;
+  padding: 9px 14px;
   color: var(--ink);
   font-size: 14px;
 }
-.markdown-section tr:nth-child(even) td { background: rgba(255,255,255,.02); }
+.markdown-section tr:nth-child(even),
+.markdown-section tr:nth-child(even) td {
+  background: #161e38 !important;
+}
+.markdown-section tr:hover td { background: #1c2547 !important; }
 .markdown-section hr { border: none; border-top: 1px dashed var(--line); margin: 36px 0; }
 .markdown-section img { border-radius: 10px; }
 
 /* ---------- 自定义卡片组件 ---------- */
-/* 陷阱卡片 */
 .trap-card {
-  background: linear-gradient(135deg, rgba(242,125,125,.10), var(--bg-card));
-  border: 1px solid rgba(242,125,125,.35);
+  background: linear-gradient(135deg, rgba(242,139,139,.12), var(--bg-card));
+  border: 1px solid rgba(242,139,139,.40);
   border-radius: 12px;
   padding: 14px 18px;
   margin: 14px 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
 }
 .trap-card::before {
   content: "⚠️ 陷阱 · Trap";
@@ -147,13 +218,13 @@ body .content {
 }
 .trap-card p { margin: 4px 0; font-size: 14px; }
 
-/* 记忆卡片 */
 .mem-card {
-  background: linear-gradient(135deg, rgba(109,217,164,.10), var(--bg-card));
-  border: 1px solid rgba(109,217,164,.30);
+  background: linear-gradient(135deg, rgba(121,224,174,.12), var(--bg-card));
+  border: 1px solid rgba(121,224,174,.35);
   border-radius: 12px;
   padding: 14px 18px;
   margin: 14px 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
 }
 .mem-card::before {
   content: "💡 一句话记住";
@@ -165,13 +236,13 @@ body .content {
 }
 .mem-card p { margin: 4px 0; font-size: 14px; }
 
-/* 考试重点卡片 */
 .exam-card {
-  background: linear-gradient(135deg, rgba(242,197,108,.10), var(--bg-card));
-  border: 1px solid rgba(242,197,108,.35);
+  background: linear-gradient(135deg, rgba(245,205,125,.12), var(--bg-card));
+  border: 1px solid rgba(245,205,125,.40);
   border-radius: 12px;
   padding: 14px 18px;
   margin: 14px 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
 }
 .exam-card::before {
   content: "🎯 考试重点";
@@ -183,13 +254,13 @@ body .content {
 }
 .exam-card p { margin: 4px 0; font-size: 14px; }
 
-/* Lab / 实战关联卡片 */
 .lab-card {
-  background: linear-gradient(135deg, rgba(155,140,255,.10), var(--bg-card));
-  border: 1px solid rgba(155,140,255,.30);
+  background: linear-gradient(135deg, rgba(168,154,255,.12), var(--bg-card));
+  border: 1px solid rgba(168,154,255,.35);
   border-radius: 12px;
   padding: 14px 18px;
   margin: 14px 0;
+  box-shadow: 0 4px 16px rgba(0,0,0,.25);
 }
 .lab-card::before {
   content: "🧪 Lab 关联";
@@ -205,7 +276,7 @@ body .content {
 .topic-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
 .topic-card {
   display: block;
-  background: var(--bg-card);
+  background: linear-gradient(160deg, #161e3a, var(--bg-card));
   border: 1px solid var(--line);
   border-radius: 14px;
   padding: 20px;
@@ -216,11 +287,11 @@ body .content {
 .topic-card:hover {
   transform: translateY(-4px);
   border-color: var(--blue);
-  box-shadow: 0 8px 28px rgba(79,140,255,.18);
+  box-shadow: 0 10px 30px rgba(92,154,255,.22);
   color: var(--ink);
 }
 .topic-card .tc-emoji { font-size: 28px; }
-.topic-card .tc-title { font-size: 17px; font-weight: 700; margin: 8px 0 4px; color: #fff; }
+.topic-card .tc-title { font-size: 17px; font-weight: 700; margin: 8px 0 4px; color: #ffffff; }
 .topic-card .tc-sub { font-size: 13px; color: var(--ink-dim); line-height: 1.7; }
 .topic-card .tc-tag {
   display: inline-block; margin-top: 10px; font-size: 12px; color: var(--blue);
@@ -233,7 +304,7 @@ body .content {
   border-radius: 12px;
   padding: 14px 18px;
   margin: 12px 0;
-  background: rgba(79,140,255,.05);
+  background: rgba(92,154,255,.06);
 }
 .guide-box::before {
   content: "🔍 读图指南";
@@ -260,9 +331,9 @@ body .content {
 /* 选中弹出工具条 */
 #hl-toolbar {
   position: absolute; z-index: 9999; display: none;
-  background: #161e38; border: 1px solid var(--blue-soft);
+  background: #182141; border: 1px solid var(--blue-soft);
   border-radius: 10px; padding: 6px 8px;
-  box-shadow: 0 6px 24px rgba(0,0,0,.5);
+  box-shadow: 0 6px 24px rgba(0,0,0,.55);
   gap: 6px; align-items: center;
 }
 #hl-toolbar .hl-btn {
@@ -284,7 +355,7 @@ body .content {
   color: #fff; border: none; border-radius: 999px;
   padding: 12px 20px; font-size: 14px; font-weight: 600;
   font-family: "Microsoft YaHei", sans-serif;
-  cursor: pointer; box-shadow: 0 6px 22px rgba(79,140,255,.4);
+  cursor: pointer; box-shadow: 0 6px 22px rgba(92,154,255,.45);
   display: flex; align-items: center; gap: 8px;
 }
 #my-marks-btn:hover { filter: brightness(1.15); }
@@ -298,8 +369,8 @@ body .content {
 #marks-panel {
   position: fixed; right: 22px; bottom: 84px; z-index: 9998;
   width: 360px; max-height: 60vh;
-  background: #10162b; border: 1px solid var(--line);
-  border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,.6);
+  background: #121830; border: 1px solid var(--line);
+  border-radius: 14px; box-shadow: 0 12px 40px rgba(0,0,0,.65);
   display: none; flex-direction: column; overflow: hidden;
 }
 #marks-panel.open { display: flex; }
@@ -332,18 +403,20 @@ body .content {
 /* 备注输入弹窗 */
 #hl-note-modal {
   position: fixed; inset: 0; z-index: 10000; display: none;
-  background: rgba(0,0,0,.6); align-items: center; justify-content: center;
+  background: rgba(0,0,0,.65); align-items: center; justify-content: center;
 }
 #hl-note-modal.open { display: flex; }
 #hl-note-modal .modal-box {
-  width: 380px; background: #131a30; border: 1px solid var(--blue-soft);
+  width: 380px; background: #161e38; border: 1px solid var(--blue-soft);
   border-radius: 14px; padding: 18px;
+  box-shadow: 0 14px 44px rgba(0,0,0,.6);
 }
 #hl-note-modal textarea {
   width: 100%; height: 90px; background: #0d1226; color: var(--ink);
   border: 1px solid var(--line); border-radius: 8px; padding: 10px;
   font-family: inherit; font-size: 14px; resize: vertical;
 }
+#hl-note-modal textarea:focus { border-color: var(--blue); outline: none; }
 #hl-note-modal .modal-actions { text-align: right; margin-top: 12px; }
 #hl-note-modal button {
   border: none; border-radius: 8px; padding: 8px 16px; cursor: pointer;
@@ -351,18 +424,20 @@ body .content {
 }
 #hl-note-modal .btn-save { background: var(--blue); color: #fff; }
 #hl-note-modal .btn-cancel { background: var(--bg-hover); color: var(--ink-dim); }
-#hl-note-modal .btn-del { background: none; color: var(--red); border: 1px solid rgba(242,125,125,.4); }
+#hl-note-modal .btn-del { background: none; color: var(--red); border: 1px solid rgba(242,139,139,.4); }
 
 /* 跳转定位闪烁 */
 @keyframes hl-flash {
-  0%, 100% { box-shadow: 0 0 0 0 rgba(79,140,255,0); }
-  30% { box-shadow: 0 0 0 6px rgba(79,140,255,.55); }
-  70% { box-shadow: 0 0 0 3px rgba(79,140,255,.25); }
+  0%, 100% { box-shadow: 0 0 0 0 rgba(92,154,255,0); }
+  30% { box-shadow: 0 0 0 6px rgba(92,154,255,.55); }
+  70% { box-shadow: 0 0 0 3px rgba(92,154,255,.25); }
 }
 .hl-flash { animation: hl-flash 1.2s ease 2; border-radius: 4px; }
 
 /* 打印 & 小屏 */
 @media (max-width: 768px) {
-  .markdown-section { padding: 24px 18px 120px; }
+  .markdown-section { padding: 26px 18px 120px; }
+  .markdown-section h1 { font-size: 26px; }
+  .markdown-section h2 { font-size: 20px; }
   #marks-panel { width: calc(100vw - 44px); }
 }
